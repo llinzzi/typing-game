@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>打字游戏 - 字母挑战</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-layout">
+        <div class="game-container">
+            <header class="game-header">
+                <h1>🎯 字母打字挑战</h1>
+            </header>
+
+            <main class="game-main">
+                <div class="game-area">
+                    <div class="letter-display">
+                        <span id="current-letter" class="current-letter">A</span>
+                    </div>
+                    <div class="game-info">
+                        <p id="game-message" class="game-message">准备开始！按任意键开始游戏</p>
+                    </div>
+                </div>
+
+                <div class="keyboard-hint">
+                    <h3>MacBook Pro 键盘</h3>
+                    <div class="keyboard-layout">
+                        <!-- 第一行：数字键 -->
+                        <div class="keyboard-row number-row">
+                            <div class="key number-key">`</div>
+                            <div class="key number-key">1</div>
+                            <div class="key number-key">2</div>
+                            <div class="key number-key">3</div>
+                            <div class="key number-key">4</div>
+                            <div class="key number-key">5</div>
+                            <div class="key number-key">6</div>
+                            <div class="key number-key">7</div>
+                            <div class="key number-key">8</div>
+                            <div class="key number-key">9</div>
+                            <div class="key number-key">0</div>
+                            <div class="key number-key">-</div>
+                            <div class="key number-key">=</div>
+                            <div class="key delete-key">⌫</div>
+                        </div>
+                        <!-- 第二行：Q行 -->
+                        <div class="keyboard-row">
+                            <div class="key tab-key">⇥</div>
+                            <div class="key">Q</div>
+                            <div class="key">W</div>
+                            <div class="key">E</div>
+                            <div class="key">R</div>
+                            <div class="key">T</div>
+                            <div class="key">Y</div>
+                            <div class="key">U</div>
+                            <div class="key">I</div>
+                            <div class="key">O</div>
+                            <div class="key">P</div>
+                            <div class="key">[</div>
+                            <div class="key">]</div>
+                            <div class="key">\</div>
+                        </div>
+                        <!-- 第三行：A行 -->
+                        <div class="keyboard-row">
+                            <div class="key caps-key">⇪</div>
+                            <div class="key">A</div>
+                            <div class="key">S</div>
+                            <div class="key">D</div>
+                            <div class="key">F</div>
+                            <div class="key">G</div>
+                            <div class="key">H</div>
+                            <div class="key">J</div>
+                            <div class="key">K</div>
+                            <div class="key">L</div>
+                            <div class="key">;</div>
+                            <div class="key">'</div>
+                            <div class="key return-key">↵</div>
+                        </div>
+                        <!-- 第四行：Z行 -->
+                        <div class="keyboard-row">
+                            <div class="key shift-key">⇧</div>
+                            <div class="key">Z</div>
+                            <div class="key">X</div>
+                            <div class="key">C</div>
+                            <div class="key">V</div>
+                            <div class="key">B</div>
+                            <div class="key">N</div>
+                            <div class="key">M</div>
+                            <div class="key">,</div>
+                            <div class="key">.</div>
+                            <div class="key">/</div>
+                            <div class="key shift-key">⇧</div>
+                        </div>
+                        <!-- 第五行：空格行 -->
+                        <div class="keyboard-row">
+                            <div class="key fn-key">fn</div>
+                            <div class="key control-key">⌃</div>
+                            <div class="key option-key">⌥</div>
+                            <div class="key command-key">⌘</div>
+                            <div class="key space-key">空格</div>
+                            <div class="key command-key">⌘</div>
+                            <div class="key option-key">⌥</div>
+                            <div class="key arrow-key">←</div>
+                            <div class="key arrow-key">↓</div>
+                            <div class="key arrow-key">→</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <button id="start-btn" class="btn btn-primary">开始游戏</button>
+                    <button id="pause-btn" class="btn btn-secondary" disabled>暂停</button>
+                    <button id="reset-btn" class="btn btn-secondary">重置</button>
+                </div>
+            </main>
+        </div>
+
+        <div class="sticker-container">
+            <div class="sticker-stats">
+                <div class="stat-item">
+                    <span class="stat-label">分数</span>
+                    <span id="score" class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">连击</span>
+                    <span id="combo" class="stat-value">0</span>
+                </div>
+            </div>
+            <h3>贴纸收集</h3>
+            <div class="sticker-grid" id="sticker-grid">
+                <!-- 贴纸将在这里动态生成 -->
+            </div>
+            <div class="sticker-progress">
+                <span id="sticker-count">0</span> / <span id="sticker-target">20</span>
+            </div>
+        </div>
+
+        <div class="reward-notification" id="reward-notification">
+            <span id="reward-text"></span>
+        </div>
+    </div>
+
+        <div class="game-over-modal" id="game-over-modal">
+            <div class="modal-content">
+                <h2>游戏结束！</h2>
+                <div class="final-stats">
+                    <p>最终分数: <span id="final-score">0</span></p>
+                    <p>最高连击: <span id="final-combo">0</span></p>
+                    <p>正确率: <span id="final-accuracy">0%</span></p>
+                </div>
+                <button id="play-again-btn" class="btn btn-primary">再玩一次</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
