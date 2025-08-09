@@ -522,6 +522,13 @@ body {
     animation: stickerPop 0.5s ease-out;
 }
 
+.sticker-slot.bonus-sticker {
+    border: 2px solid #ffd700;
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    animation: bonusStickerPop 0.8s ease-out;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+}
+
 .sticker-slot.removed {
     animation: stickerRemove 0.3s ease-out;
 }
@@ -533,6 +540,29 @@ body {
     }
     50% {
         transform: scale(1.2) rotate(180deg);
+    }
+    100% {
+        transform: scale(1) rotate(360deg);
+        opacity: 1;
+    }
+}
+
+@keyframes bonusStickerPop {
+    0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 0;
+    }
+    25% {
+        transform: scale(1.5) rotate(90deg);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1.3) rotate(180deg);
+        opacity: 0.8;
+    }
+    75% {
+        transform: scale(1.1) rotate(270deg);
+        opacity: 0.9;
     }
     100% {
         transform: scale(1) rotate(360deg);
@@ -560,4 +590,200 @@ body {
 
 .sticker-progress span {
     color: #667eea;
+}
+
+/* 成就系统样式 */
+.achievement-container {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 3000;
+    pointer-events: none;
+}
+
+.achievement-notification {
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    border-radius: 15px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    animation: slideInLeft 0.5s ease-out;
+    pointer-events: auto;
+    max-width: 300px;
+}
+
+.achievement-icon {
+    font-size: 2rem;
+    animation: bounce 1s infinite;
+}
+
+.achievement-content {
+    flex: 1;
+}
+
+.achievement-title {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #8b4513;
+    margin-bottom: 0.3rem;
+}
+
+.achievement-name {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #d2691e;
+    margin-bottom: 0.2rem;
+}
+
+.achievement-desc {
+    font-size: 0.8rem;
+    color: #a0522d;
+}
+
+.achievement-notification.fade-out {
+    animation: slideOutLeft 0.5s ease-in forwards;
+}
+
+@keyframes slideInLeft {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutLeft {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+}
+
+/* 盲盒系统样式 */
+.blind-box-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 4000;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.blind-box-content {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    padding: 3rem;
+    border-radius: 20px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    animation: scaleIn 0.5s ease-out;
+}
+
+.blind-box-content h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.blind-box-container {
+    margin: 2rem 0;
+}
+
+.blind-box {
+    width: 150px;
+    height: 150px;
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+    transition: all 0.3s ease;
+    animation: pulse 2s infinite;
+}
+
+.blind-box:hover {
+    transform: scale(1.1);
+    box-shadow: 0 15px 40px rgba(255, 215, 0, 0.5);
+}
+
+.blind-box-text {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #8b4513;
+}
+
+.blind-box.opened {
+    animation: openBox 0.5s ease-out;
+}
+
+.big-sticker {
+    font-size: 4rem;
+    animation: bounce 1s infinite;
+}
+
+.big-sticker-display {
+    font-size: 6rem;
+    margin: 2rem 0;
+    animation: bounce 1s infinite;
+}
+
+/* 背景贴纸样式 */
+.background-stickers {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.background-sticker {
+    position: absolute;
+    font-size: 3rem;
+    opacity: 0.1;
+    animation: float 6s ease-in-out infinite;
+    user-select: none;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes scaleIn {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes openBox {
+    0% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.2) rotate(180deg); }
+    100% { transform: scale(1) rotate(360deg); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    25% { transform: translateY(-20px) rotate(5deg); }
+    50% { transform: translateY(-10px) rotate(-5deg); }
+    75% { transform: translateY(-15px) rotate(3deg); }
 }
